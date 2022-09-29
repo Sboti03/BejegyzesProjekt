@@ -1,5 +1,7 @@
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeFormatterBuilder;
 
 public class Bejegyzes {
     private String szerzo;
@@ -23,7 +25,6 @@ public class Bejegyzes {
     }
 
     public String getTartalom() {
-        szerkesztve = LocalDateTime.now();
         return tartalom;
     }
 
@@ -44,6 +45,7 @@ public class Bejegyzes {
 
 
     public void setTartalom(String tartalom) {
+        szerkesztve = LocalDateTime.now();
         this.tartalom = tartalom;
     }
 
@@ -59,11 +61,16 @@ public class Bejegyzes {
 
     @Override
     public String toString() {
-        return String.format("%s - %s - %s\n" +
-                "Szerkesztve: \n" +
-                        "%s"
-                , szerzo, likeok, letrejott.toString(),
-                szerkesztve.toString(),
-                tartalom);
+        String szoveg = "";
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("uuuu-MM-dd'T'HH:mm:ss");
+        if (letrejott.toString().equals(szerkesztve.toString())){
+            szoveg = String.format("%s - %s - %s\n" +
+                    "%s", szerzo, likeok, letrejott.format(dtf), tartalom);
+        }else {
+            szoveg = String.format("%s - %s - %s\n" +
+                    "Szerkesztve: %s\n" +
+                    "%s", szerzo, likeok, letrejott.format(dtf),szerkesztve.format(dtf), tartalom);
+        }
+        return szoveg;
     }
 }
