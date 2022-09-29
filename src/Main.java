@@ -14,13 +14,14 @@ public class Main {
         readIn(bejegyzesek);
         rndLike(bejegyzesek);
         changeSecContent(bejegyzesek);
+
         System.out.println("-------Rendezettlen-------\n");
-        for (Bejegyzes b : bejegyzesek) {
-            System.out.println(b.toString());
-        }
+        kiir(bejegyzesek);
         System.out.println("-------Rendezettlen-------\n");
 
         legnepszerubbPost(bejegyzesek);
+
+
         // ------------35nél több like------------
         {
             int count = 0;
@@ -31,6 +32,8 @@ public class Main {
             }
             System.out.printf("%ddb bejegyzés van amin 35nél több like van.\n",count);
         }
+
+
         // ------------ 15nél kevesebb like------------
         {
             int count = 0;
@@ -43,12 +46,12 @@ public class Main {
         }
         // ------------------------
 
-        bejegyzesek = rendez(bejegyzesek);
-        System.out.println("-------Rendezett-------\n");
-        for (Bejegyzes b : bejegyzesek) {
-            System.out.println(b.toString());
 
-        }
+        bejegyzesek = rendez(bejegyzesek);
+
+
+        System.out.println("-------Rendezett-------\n");
+        kiir(bejegyzesek);
         System.out.println("-------Rendezett-------\n");
 
         writeOut(bejegyzesek);
@@ -134,5 +137,12 @@ public class Main {
             bf.write(b.toString()+"\n");
         }
         bf.close();
+    }
+
+    public static void kiir(List<Bejegyzes> bejegyzesek) {
+        for (Bejegyzes b : bejegyzesek) {
+            System.out.println(b.toString());
+
+        }
     }
 }
